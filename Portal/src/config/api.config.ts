@@ -1,5 +1,5 @@
 export const API_CONFIG = {
-  BASE_URL: 'http://18.215.148.212:4000',
+  BASE_URL: 'https://kaira-backend.onrender.com',
 
   AUTH: {
     LOGIN: '/api/auth/login',
@@ -13,4 +13,5 @@ export const API_CONFIG = {
 };
 
 // http://18.215.148.212:4000
+
 // http://localhost:4000
