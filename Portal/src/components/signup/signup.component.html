@@ -1,0 +1,196 @@
+<div class="mx-auto flex flex-col items-center justify-center">
+  <div class="w-full max-w-4xl rounded-xl bg-white/10 p-8 shadow-2xl backdrop-blur-lg">
+    <div class="text-center text-white">
+       <div class="flex items-center justify-center space-x-3 mb-2">
+            <svg class="w-10 h-10 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+            </svg>
+            <h1 class="text-4xl font-bold tracking-wider">Harsha Engineers</h1>
+        </div>
+      <p class="mt-2 text-sm text-gray-300">Create Your Enterprise Account</p>
+    </div>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="mt-8">
+      <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
+        
+        <div>
+          <label for="firstName" class="block text-sm font-medium text-gray-200">First Name</label>
+          <input type="text" formControlName="firstName" id="firstName" class="mt-1 block w-full rounded-md border-gray-500 bg-white/20 py-2 px-3 text-white placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" [class.border-red-400]="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched">
+          @if (signupForm.get('firstName')?.hasError('required') && signupForm.get('firstName')?.touched) {
+            <p class="mt-1 text-xs text-red-300">First name is required.</p>
+          }
+        </div>
+        
+        <div>
+          <label for="lastName" class="block text-sm font-medium text-gray-200">Last Name</label>
+          <input type="text" formControlName="lastName" id="lastName" class="mt-1 block w-full rounded-md border-gray-500 bg-white/20 py-2 px-3 text-white placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" [class.border-red-400]="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched">
+          @if (signupForm.get('lastName')?.hasError('required') && signupForm.get('lastName')?.touched) {
+            <p class="mt-1 text-xs text-red-300">Last name is required.</p>
+          }
+        </div>
+        
+        <div class="sm:col-span-2">
+          <label for="email" class="block text-sm font-medium text-gray-200">Corporate Email</label>
+          <input type="email" formControlName="email" id="email" class="mt-1 block w-full rounded-md border-gray-500 bg-white/20 py-2 px-3 text-white placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" [class.border-red-400]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+          @if(signupForm.get('email')?.hasError('required') && signupForm.get('email')?.touched) {
+             <p class="mt-1 text-xs text-red-300">Email is required.</p>
+          }
+          @if(signupForm.get('email')?.hasError('email') && signupForm.get('email')?.touched) {
+             <p class="mt-1 text-xs text-red-300">Please enter a valid email address.</p>
+          }
+          @if(signupForm.get('email')?.hasError('unauthorizedDomain') && signupForm.get('email')?.touched) {
+             <p class="mt-1 text-xs text-red-300">Unauthorized Email Domain. Please use a valid corporate email.</p>
+          }
+        </div>
+        
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-200">Username</label>
+          <input type="text" formControlName="username" id="username" class="mt-1 block w-full rounded-md border-gray-500 bg-gray-600/30 py-2 px-3 text-gray-300 placeholder-gray-400 shadow-sm sm:text-sm" readonly>
+        </div>
+
+        <div>
+          <label for="phone" class="block text-sm font-medium text-gray-200">Phone Number</label>
+          <input type="tel" formControlName="phone" id="phone" class="mt-1 block w-full rounded-md border-gray-500 bg-white/20 py-2 px-3 text-white placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" [class.border-red-400]="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched">
+           @if (signupForm.get('phone')?.hasError('required') && signupForm.get('phone')?.touched) {
+            <p class="mt-1 text-xs text-red-300">Phone number is required.</p>
+          }
+           @if (signupForm.get('phone')?.hasError('pattern') && signupForm.get('phone')?.touched) {
+            <p class="mt-1 text-xs text-red-300">Please enter a valid phone number.</p>
+          }
+        </div>
+        
+        <div>
+          <label for="country" class="block text-sm font-medium text-gray-200">Country / Region</label>
+          <input type="text" formControlName="country" id="country" class="mt-1 block w-full rounded-md border-gray-500 bg-white/20 py-2 px-3 text-white placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" [class.border-red-400]="signupForm.get('country')?.invalid && signupForm.get('country')?.touched">
+           @if (signupForm.get('country')?.hasError('required') && signupForm.get('country')?.touched) {
+            <p class="mt-1 text-xs text-red-300">Country is required.</p>
+          }
+        </div>
+        
+        <div>
+          <label for="location" class="block text-sm font-medium text-gray-200">Location</label>
+          <input type="text" formControlName="location" id="location" class="mt-1 block w-full rounded-md border-gray-500 bg-white/20 py-2 px-3 text-white placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" [class.border-red-400]="signupForm.get('location')?.invalid && signupForm.get('location')?.touched">
+           @if (signupForm.get('location')?.hasError('required') && signupForm.get('location')?.touched) {
+            <p class="mt-1 text-xs text-red-300">Location is required.</p>
+          }
+        </div>
+
+        <div>
+          <label for="companyName" class="block text-sm font-medium text-gray-200">Company Name</label>
+          <input type="text" formControlName="companyName" id="companyName" class="mt-1 block w-full rounded-md border-gray-500 bg-white/20 py-2 px-3 text-white placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" [class.border-red-400]="signupForm.get('companyName')?.invalid && signupForm.get('companyName')?.touched">
+           @if (signupForm.get('companyName')?.hasError('required') && signupForm.get('companyName')?.touched) {
+            <p class="mt-1 text-xs text-red-300">Company name is required.</p>
+          }
+        </div>
+        
+        <div>
+          <label for="jobTitle" class="block text-sm font-medium text-gray-200">Job Title</label>
+          <input type="text" formControlName="jobTitle" id="jobTitle" class="mt-1 block w-full rounded-md border-gray-500 bg-white/20 py-2 px-3 text-white placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" [class.border-red-400]="signupForm.get('jobTitle')?.invalid && signupForm.get('jobTitle')?.touched">
+           @if (signupForm.get('jobTitle')?.hasError('required') && signupForm.get('jobTitle')?.touched) {
+            <p class="mt-1 text-xs text-red-300">Job title is required.</p>
+          }
+        </div>
+
+        <div class="sm:col-span-2">
+          <hr class="my-2 border-white/20">
+        </div>
+
+        <div>
+          <label for="securityQuestion" class="block text-sm font-medium text-gray-200">Security Question</label>
+          <select formControlName="securityQuestion" id="securityQuestion" class="mt-1 block w-full rounded-md border-gray-500 bg-white/20 py-2 px-3 text-white placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" [class.border-red-400]="signupForm.get('securityQuestion')?.invalid && signupForm.get('securityQuestion')?.touched">
+            <option value="" disabled class="bg-gray-700">Select a question</option>
+            @for (question of securityQuestions; track question) {
+              <option [value]="question" class="bg-gray-700">{{ question }}</option>
+            }
+          </select>
+          @if (signupForm.get('securityQuestion')?.hasError('required') && signupForm.get('securityQuestion')?.touched) {
+            <p class="mt-1 text-xs text-red-300">Please select a security question.</p>
+          }
+        </div>
+        
+        <div>
+          <label for="securityAnswer" class="block text-sm font-medium text-gray-200">Security Answer</label>
+          <input type="text" formControlName="securityAnswer" id="securityAnswer" class="mt-1 block w-full rounded-md border-gray-500 bg-white/20 py-2 px-3 text-white placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" [class.border-red-400]="signupForm.get('securityAnswer')?.invalid && signupForm.get('securityAnswer')?.touched">
+          @if (signupForm.get('securityAnswer')?.hasError('required') && signupForm.get('securityAnswer')?.touched) {
+            <p class="mt-1 text-xs text-red-300">Security answer is required.</p>
+          }
+        </div>
+        
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-200">Password</label>
+          <div class="mt-1 relative">
+            <input formControlName="password" id="password" [type]="passwordVisible() ? 'text' : 'password'" class="block w-full rounded-md border-gray-500 bg-white/20 py-2 px-3 pr-10 text-white placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" [class.border-red-400]="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+            <button type="button" (click)="togglePasswordVisibility()" class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-white">
+              @if (passwordVisible()) {
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.243 4.243L6.228 6.228" />
+                </svg>
+              } @else {
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.432 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              }
+            </button>
+          </div>
+          @if (signupForm.get('password')?.hasError('required') && signupForm.get('password')?.touched) {
+            <p class="mt-1 text-xs text-red-300">Password is required.</p>
+          }
+          @if (signupForm.get('password')?.hasError('minlength') && signupForm.get('password')?.touched) {
+            <p class="mt-1 text-xs text-red-300">Password must be at least 8 characters long.</p>
+          }
+        </div>
+
+        <div>
+          <label for="confirmPassword" class="block text-sm font-medium text-gray-200">Confirm Password</label>
+          <div class="mt-1 relative">
+            <input formControlName="confirmPassword" id="confirmPassword" [type]="confirmPasswordVisible() ? 'text' : 'password'" class="block w-full rounded-md border-gray-500 bg-white/20 py-2 px-3 pr-10 text-white placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" [class.border-red-400]="(signupForm.hasError('passwordMismatch') || signupForm.get('confirmPassword')?.hasError('required')) && signupForm.get('confirmPassword')?.touched">
+            <button type="button" (click)="toggleConfirmPasswordVisibility()" class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-white">
+              @if (confirmPasswordVisible()) {
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.243 4.243L6.228 6.228" />
+                </svg>
+              } @else {
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.432 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              }
+            </button>
+          </div>
+           @if (signupForm.get('confirmPassword')?.hasError('required') && signupForm.get('confirmPassword')?.touched) {
+            <p class="mt-1 text-xs text-red-300">Please confirm your password.</p>
+          }
+           @if (signupForm.hasError('passwordMismatch') && signupForm.get('confirmPassword')?.touched) {
+            <p class="mt-1 text-xs text-red-300">Passwords do not match.</p>
+          }
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <button type="submit" [disabled]="isLoading()"
+                class="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-indigo-400 disabled:cursor-not-allowed">
+            @if (isLoading()) {
+                <span class="animate-spin h-5 w-5 border-t-2 border-r-2 border-white rounded-full"></span>
+            } @else {
+                <span>Create Account</span>
+            }
+        </button>
+      </div>
+
+       @if (signupStatus(); as status) {
+        <div class="mt-4 p-3 rounded-md text-sm" [class]="status.isError ? 'bg-red-500/30 text-red-200' : 'bg-green-500/30 text-green-200'">
+          {{ status.message }}
+        </div>
+      }
+
+    </form>
+
+    <p class="mt-6 text-center text-sm text-gray-300">
+      Already have an account?
+      <button (click)="onLoginClick()" class="font-medium text-indigo-400 hover:text-indigo-300">
+        Sign in
+      </button>
+    </p>
+  </div>
+</div>

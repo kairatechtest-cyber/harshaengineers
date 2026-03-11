@@ -1,0 +1,24 @@
+<app-loading-indicator></app-loading-indicator>
+@if (isLoggedIn()) {
+  <app-dashboard (logout)="onLogout()"></app-dashboard>
+} @else {
+  <main class="relative min-h-screen w-full flex items-center justify-center p-4 bg-cover bg-center bg-no-repeat" style="background-image: url('https://imgs.search.brave.com/qzcz09eNeho1nwx35W7sGgBPUDHkAIvJYx3C_-36PPA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS12ZWN0b3Iv/YWJzdHJhY3QtYmx1/ZS10ZWNobm9sb2d5/LWJhY2tncm91bmRf/MjMtMjE0OTM1MjA1/OC5qcGc_c2VtdD1h/aXNfaHlicmlkJnc9/NzQwJnE9ODA');">
+    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+    <div class="relative z-10 w-full max-w-4xl transition-all duration-500">
+        @switch (authViewState()) {
+          @case ('login') {
+            <app-login 
+              (switchToSignup)="onSwitchToSignup()" 
+              (switchToForgotPassword)="onSwitchToForgotPassword()" 
+              (loginSuccess)="onLoginSuccess($event)"></app-login>
+          }
+          @case ('signup') {
+            <app-signup (switchToLogin)="onSwitchToLogin()"></app-signup>
+          }
+          @case ('forgot-password') {
+            <app-forgot-password (switchToLogin)="onSwitchToLogin()"></app-forgot-password>
+          }
+        }
+    </div>
+  </main>
+}

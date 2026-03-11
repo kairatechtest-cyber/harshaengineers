@@ -1,0 +1,5 @@
+{
+  "name": "Harsha Engineers Portal",
+  "description": "A secure, multi-tenant enterprise portal for login and user registration with automated domain-based approval workflows.",
+  "requestFramePermissions": []
+}

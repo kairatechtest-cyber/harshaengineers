@@ -1,0 +1,75 @@
+
+<div class="text-white grid grid-cols-1 lg:grid-cols-3 gap-8">
+  <!-- Group List -->
+  <div class="lg:col-span-2">
+    <h2 class="text-xl font-semibold mb-4">Groups</h2>
+    @if (isLoading()) {
+      <div class="flex justify-center items-center p-8">
+        <div class="animate-spin h-8 w-8 border-t-2 border-r-2 border-indigo-400 rounded-full"></div>
+      </div>
+    } @else {
+      <div class="overflow-x-auto bg-black/20 rounded-lg">
+        <table class="min-w-full text-sm text-left">
+          <thead class="bg-white/10 text-gray-300 uppercase tracking-wider">
+            <tr>
+              <th scope="col" class="px-6 py-3">Group Name</th>
+              <th scope="col" class="px-6 py-3">Mapped Domains</th>
+              <th scope="col" class="px-6 py-3 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/10">
+            @for (group of groups(); track group.id) {
+              <tr class="hover:bg-white/5">
+                <td class="px-6 py-4 font-medium whitespace-nowrap">{{ group.name }}</td>
+                <td class="px-6 py-4 text-gray-300">
+                    @for (domain of group.domains; track domain) {
+                        <span class="inline-block bg-gray-600/50 rounded-full px-2 py-1 text-xs mr-1 mb-1">{{ domain }}</span>
+                    }
+                </td>
+                <td class="px-6 py-4 text-right space-x-2 whitespace-nowrap">
+                  <button (click)="editGroup(group)" class="font-medium text-indigo-400 hover:text-indigo-300">Edit</button>
+                  <button (click)="deleteGroup(group)" class="font-medium text-red-400 hover:text-red-300">Delete</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+
+  <!-- Add/Edit Group Form -->
+  <div>
+    <h2 class="text-xl font-semibold mb-4">{{ editingGroup() ? 'Edit Group' : 'Add New Group' }}</h2>
+    <div class="bg-black/20 rounded-lg p-6">
+      <form [formGroup]="groupForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <div>
+          <label for="groupName" class="block text-sm font-medium text-gray-200">Group Name</label>
+          <input type="text" formControlName="name" id="groupName" class="mt-1 block w-full rounded-md border-gray-500 bg-white/20 py-2 px-3 text-white placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" [class.border-red-400]="groupForm.get('name')?.invalid && groupForm.get('name')?.touched">
+           @if (groupForm.get('name')?.hasError('required') && groupForm.get('name')?.touched) {
+            <p class="mt-1 text-xs text-red-300">Group name is required.</p>
+          }
+        </div>
+        <div>
+          <label for="domains" class="block text-sm font-medium text-gray-200">Email Domains</label>
+          <input type="text" formControlName="domains" id="domains" placeholder="domain.com, example.org" class="mt-1 block w-full rounded-md border-gray-500 bg-white/20 py-2 px-3 text-white placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" [class.border-red-400]="groupForm.get('domains')?.invalid && groupForm.get('domains')?.touched">
+          <p class="mt-1 text-xs text-gray-400">Comma-separated list of domains.</p>
+           @if (groupForm.get('domains')?.hasError('required') && groupForm.get('domains')?.touched) {
+            <p class="mt-1 text-xs text-red-300">At least one domain is required.</p>
+          }
+        </div>
+        <div class="pt-2 flex items-center space-x-4">
+          <button type="submit" [disabled]="isSubmitting()" class="flex justify-center items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium hover:bg-indigo-700 disabled:bg-indigo-400">
+             @if (isSubmitting()) {
+                <span class="animate-spin h-4 w-4 border-t-2 border-r-2 border-white rounded-full mr-2"></span>
+             }
+            <span>{{ editingGroup() ? 'Save Changes' : 'Add Group' }}</span>
+          </button>
+          @if (editingGroup()) {
+            <button type="button" (click)="cancelEdit()" class="rounded-md bg-white/10 px-4 py-2 text-sm font-medium hover:bg-white/20">Cancel</button>
+          }
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

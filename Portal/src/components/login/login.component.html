@@ -1,0 +1,105 @@
+<div class="mx-auto flex flex-col items-center justify-center">
+  <div class="w-full max-w-md rounded-xl bg-white/10 p-8 shadow-2xl backdrop-blur-lg">
+    <div class="text-center text-white">
+      <!-- <div class="flex items-center justify-center space-x-3 mb-2">
+          <svg class="w-10 h-10 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+          </svg>
+          <h1 class="text-4xl font-bold tracking-wider">Wipro Water</h1>
+      </div> -->
+      <div class="flex items-center justify-center mb-4">
+  <img 
+    src="assets/harsha (1).png" 
+    alt="Harsha Engineers"
+    class="h-14 w-auto object-contain"
+  />
+</div>
+      <p class="mt-2 text-sm text-gray-300">Real-Time Dashboard & Reports</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="mt-8 space-y-4">
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-200">Username or Email</label>
+        <div class="mt-1 relative">
+          <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+              <path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+            </svg>
+          </div>
+          <input formControlName="email" id="email" name="email" type="email" autocomplete="email" required
+                 class="block w-full rounded-md border-gray-500 bg-white/20 py-2 pl-10 pr-3 text-white placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                 [class.border-red-400]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+                 placeholder="you@example.com">
+        </div>
+        @if (loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched) {
+          <p class="mt-1 text-xs text-red-300">Email is required.</p>
+        }
+        @if (loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched) {
+          <p class="mt-1 text-xs text-red-300">Please enter a valid email address.</p>
+        }
+      </div>
+
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-200">Password</label>
+        <div class="mt-1 relative">
+          <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <input formControlName="password" id="password" name="password" [type]="passwordVisible() ? 'text' : 'password'" autocomplete="current-password" required
+                 class="block w-full rounded-md border-gray-500 bg-white/20 py-2 pl-10 pr-10 text-white placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                 [class.border-red-400]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                 placeholder="••••••••">
+          <button type="button" (click)="togglePasswordVisibility()" class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-white">
+            @if (passwordVisible()) {
+              <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.243 4.243L6.228 6.228" />
+              </svg>
+            } @else {
+              <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.432 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            }
+          </button>
+        </div>
+        @if (loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched) {
+          <p class="mt-1 text-xs text-red-300">Password is required.</p>
+        }
+      </div>
+
+      <div class="flex items-center justify-end">
+        <div class="text-sm">
+          <button type="button" (click)="onForgotPasswordClick()" class="font-medium text-indigo-400 hover:text-indigo-300">Forgot your password?</button>
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" [disabled]="isLoading()"
+                class="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-indigo-400 disabled:cursor-not-allowed">
+          @if (isLoading()) {
+            <span class="animate-spin h-5 w-5 border-t-2 border-r-2 border-white rounded-full"></span>
+          } @else {
+            <span>Sign in</span>
+          }
+        </button>
+      </div>
+
+      @if (loginStatus(); as status) {
+        <div class="mt-4 p-3 rounded-md text-sm" [class]="status.isError ? 'bg-red-500/30 text-red-200' : 'bg-green-500/30 text-green-200'">
+          {{ status.message }}
+        </div>
+      }
+
+    </form>
+
+    <p class="mt-8 text-center text-sm text-gray-300">
+      Not a member?
+      <button (click)="onSignupClick()" class="font-medium text-indigo-400 hover:text-indigo-300">
+        Create an account
+      </button>
+    </p>
+  </div>
+</div>

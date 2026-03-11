@@ -1,0 +1,152 @@
+<div class="root">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
+
+    <div class="sidebar-logo"></div>
+    <div class="sidebar-section">Navigation</div>
+
+    <!-- WATER -->
+    <div class="menu-item" (click)="toggle('water')">
+      <i class="fa-solid fa-droplet"></i> Harsha Eng. Bhayla
+      <i class="fa-solid fa-chevron-right arrow" [class.rotate]="menu.water"></i>
+    </div>
+    <div class="dropdown" *ngIf="menu.water">
+      <!-- <a href="https://dashboard.kaira-technologies.com/#/real-time" target="_blank">⚪ ETP Dashboard</a> -->
+      <a href="https://harshaengineers.grafana.net/public-dashboards/c0385e1ffef6493eaacb92f5d805e54f" target="_blank" rel="noopener"> 📊 EMS Dashboard </a>
+      <a href="https://harshaengineers.grafana.net/public-dashboards/dcd10b9f2a3e4b51af6044ef4a488afd" target="_blank" rel="noopener"> 📊 Bronze </a>
+      <a href="https://harshaengineers.grafana.net/public-dashboards/b9924bc224104acc9cc3b8ee599f8d3a" target="_blank" rel="noopener">📊 Stamping </a>
+      <a href="https://lookerstudio.google.com/reporting/ccc4c39c-5d18-4aed-bcb2-91bb8e84c808" target="_blank" rel="noopener">📑 Reports </a>
+    </div>
+
+    <!-- TYRE -->
+    <!-- <div class="menu-item" (click)="toggle('tyre')">s
+      <i class="fa-solid fa-industry"></i> Tyre
+      <i class="fa-solid fa-chevron-right arrow" [class.rotate]="menu.tyre"></i>
+    </div> -->
+
+    <!-- <div class="dropdown" *ngIf="menu.tyre">
+
+      <div class="menu-item nested" (click)="toggle('mixer')">
+        <i class="fa-solid fa-list"></i> Mixer
+        <i class="fa-solid fa-chevron-right arrow" [class.rotate]="menu.mixer"></i>
+      </div>
+      <div class="dropdown" *ngIf="menu.mixer">
+        <a href="https://kairatechtest.grafana.net/public-dashboards/7ef1f69170b242388cc89a1a99a3dfbf" target="_blank">⚪ Dashboard</a>
+        <a href="https://lookerstudio.google.com/embed/reporting/6841dd57-6880-4c72-96be-2160e1cd3bf8/page/TlJ0C" target="_blank">⚪ Reports</a>
+      </div>
+
+      <div class="menu-item nested" (click)="toggle('tbm')">
+        <i class="fa-solid fa-list"></i> TBM
+        <i class="fa-solid fa-chevron-right arrow" [class.rotate]="menu.tbm"></i>
+      </div>
+      <div class="dropdown" *ngIf="menu.tbm">
+        <a href="https://kairatechtest.grafana.net/public-dashboards/d01b24c423114dbab739cca95faf266b" target="_blank">⚪ Dashboard</a>
+        <a href="https://kairatechtest.grafana.net/public-dashboards/8b7f340c395c4fc184c66a474a395c35" target="_blank">⚪ Analysis Dashboard</a>
+      </div>
+    </div> -->
+
+    <!-- WHATSAPP -->
+    <!-- <div class="menu-item" (click)="loadWhatsApp()">
+    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+    <i class="fa-solid fa-chevron-right arrow"></i>
+  </div> -->
+  <!-- <div id="whatsappMenu" class="dropdown">
+    <a href="#" (click)="loadWhatsApp()">WhatsApp Message</a>
+  </div> -->
+
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <div class="main-content">
+
+    <header>
+      <img src="/assets/harsha (1).png" height="45" alt="Harsha Engineers" rel="Logo">
+      <!-- <img src="https://miro.medium.com/v2/1*SeH0h0HiCf97LT_KmhHiBQ.png" height="45" alt="KAIRA Technologies Logo" rel="Logo"> -->
+      <div class="header-title">Harsha Engineers, Dashboard & Report</div>
+      <div class="header-right">
+        <div>{{ greeting() }}</div>
+        <div class="time">{{ time() | date:'hh:mm:ss a' }}</div>
+        <!-- <a href="https://kaira-technologies.com/" target="_blank">
+          <i class="fa-solid fa-globe"></i> Visit Website
+        </a> -->
+        
+        <button class="logout-btn" (click)="onLogout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </header>
+
+     <!-- ================= CONTENT ================= -->
+
+    <!-- WhatsApp UI -->
+    <div *ngIf="showWhatsApp" class="wa-container">
+
+      <div class="wa-card">
+
+        <div class="wa-header">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+            class="wa-logo"
+            alt="WhatsApp">
+          <h1 class="wa-title">Harsha Engineers</h1>
+          <p class="wa-subtitle">
+            Send secure messages via WhatsApp
+          </p>
+        </div>
+
+        <div class="wa-form">
+          <label>Mobile Number</label>
+
+          <div class="wa-input-group">
+            <span class="wa-prefix">+91</span>
+            <input
+              [(ngModel)]="mobile"
+              placeholder="e.g., 9876543210">
+          </div>
+
+          <div class="wa-hint">
+            Include country code (e.g., 91 for India).
+          </div>
+
+          <button class="wa-btn" (click)="sendMessage()">
+            Send Message
+          </button>
+        </div>
+
+        <div class="wa-response">
+          {{ waResponse }}
+        </div>
+
+        <div class="wa-footer">
+          Secure • Encrypted • Real-Time Delivery
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+<footer class="app-footer">
+  Developed by
+  <a
+    href="https://kaira-technologies.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    KAIRA Technologies
+  </a>
+</footer>
+
+
+    <!-- Dynamic Content -->
+    <!-- <div id="contentArea" [innerHTML]="page()"></div> -->
+
+    <!-- Weather -->
+    <div class="weather-widget-container">
+      <iframe src="/assets/weather-widget.html"
+              title="Weather Widget"
+              class="weather-iframe"
+              [class.expanded]="weatherExpanded()"></iframe>
+    </div>
+  </div>
+</div>
